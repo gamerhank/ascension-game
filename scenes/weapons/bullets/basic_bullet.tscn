@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b2se34mefcqts"]
+
+[ext_resource type="Texture2D" uid="uid://ds6i5i3wxuxeu" path="res://sprites/weapons/bullets/basic_bullet.png" id="1_kx74m"]
+[ext_resource type="Script" uid="uid://pipm4yyhpqw8" path="res://scripts/weapons/bullets/BasicBullet.cs" id="1_qm511"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yggmv"]
+size = Vector2(16, 8)
+
+[node name="BasicBullet" type="Node2D" unique_id=1934444058]
+script = ExtResource("1_qm511")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=575771345]
+texture_filter = 1
+texture = ExtResource("1_kx74m")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1893645945]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=988553649]
+shape = SubResource("RectangleShape2D_yggmv")
+
+[node name="Visible" type="VisibleOnScreenNotifier2D" parent="." unique_id=452275433]
+position = Vector2(0, 1)
+rect = Rect2(-9, -6, 18, 10)
