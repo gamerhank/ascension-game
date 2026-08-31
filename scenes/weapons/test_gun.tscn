@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://kdbmhlf75g0n"]
+
+[ext_resource type="Texture2D" uid="uid://11scg326yrvf" path="res://sprites/weapons/basic_gun.png" id="1_eqeie"]
+
+[node name="TestGun" type="Node2D" unique_id=1065252230]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2025813596]
+texture_filter = 1
+texture = ExtResource("1_eqeie")
