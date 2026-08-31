@@ -5,11 +5,23 @@ using System.Diagnostics.CodeAnalysis;
 public partial class Player : CharacterBody2D
 {
 	[Export]
-	public float Speed = 300.0f;
+	private float Speed = 300.0f;
 	[Export]
-	public float JumpVelocity = -400.0f;
+	private float JumpVelocity = -400.0f;
 	[Export]
 	private float GravityMultiplier = 2.0f;
+
+	[Export]
+	public PackedScene EquippedWeaponScene;
+
+    public override void _Ready()
+	{
+		if(EquippedWeaponScene != null)
+		{
+			AddChild(EquippedWeaponScene.Instantiate());
+		}
+	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{

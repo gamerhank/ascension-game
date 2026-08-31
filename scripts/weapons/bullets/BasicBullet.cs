@@ -3,6 +3,9 @@ using System;
 
 public partial class BasicBullet : Node2D
 {
+	[Export]
+	public float BulletSpeedMultiplier = 10.0f;
+
 	private VisibleOnScreenNotifier2D notifier;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -19,7 +22,7 @@ public partial class BasicBullet : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Position += Vector2.Right * 10.0f;
+		Position += Transform.X * 10.0f;
 	}
 
 	private void OnScreenExited()

@@ -19,13 +19,16 @@ public partial class BasicGun : Node2D
 
 		if(Input.IsActionJustPressed("Shoot"))
 		{
-			GD.Print("Shoot pressed");
-			Vector2 bulletSpawnPos = Position;
-			float bulletSpawnDir = Rotation;
+			// GD.Print("Shoot pressed, rotation=", Rotation);
+			Vector2 bulletSpawnPos = GlobalPosition;
+			float bulletSpawnDir = GlobalRotation;
 			Node2D bulletNode = bulletScene.Instantiate<Node2D>();
-			bulletNode.Position = bulletSpawnPos;
+			// bulletNode.Position = bulletSpawnPos;
+			// GD.Print("bullet rotation=", bulletNode.Rotation);
+			GetTree().CurrentScene.AddChild(bulletNode);
+
+			bulletNode.GlobalPosition = bulletSpawnPos;
 			bulletNode.Rotation = bulletSpawnDir;
-			GetParent().AddChild(bulletNode);
 		}
 	}
 }
