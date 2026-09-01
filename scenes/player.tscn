@@ -1,10 +1,45 @@
 [gd_scene format=3 uid="uid://5lbwiqqmetql"]
 
 [ext_resource type="Script" uid="uid://dgx7l7y5n3f2h" path="res://scripts/Player.cs" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://db5mt15sa6ane" path="res://icon.svg" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cqp2fojlen35x" path="res://sprites/player/walking/wizard1.png" id="2_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://mhafsrx1vxdt" path="res://sprites/player/walking/wizard2.png" id="3_fjrip"]
+[ext_resource type="Texture2D" uid="uid://b3n6cqcg70g3h" path="res://sprites/player/walking/wizard3.png" id="4_smehm"]
+[ext_resource type="Texture2D" uid="uid://xcovrdkwnmkt" path="res://sprites/player/walking/wizard4.png" id="5_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://btd8o6vuhbfhc" path="res://sprites/player/walking/wizard5.png" id="6_y4r1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yggmv"]
 size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6kmws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tuyoq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fjrip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_smehm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ur7pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y4r1p")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 10.0
+}]
 
 [node name="Player" type="CharacterBody2D" unique_id=1927710583]
 script = ExtResource("1_g2els")
@@ -13,6 +48,9 @@ script = ExtResource("1_g2els")
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_yggmv")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1576860206]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_qhqgy")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1404201156]
+texture_filter = 1
+position = Vector2(9.536743e-07, 9.536743e-07)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6kmws")
+animation = &"walk"

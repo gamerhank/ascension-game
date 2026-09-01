@@ -14,13 +14,43 @@ public partial class Player : CharacterBody2D
 	[Export]
 	public PackedScene EquippedWeaponScene;
 
+	private AnimatedSprite2D animatedSprite2D;
+
     public override void _Ready()
 	{
+		animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
 		if(EquippedWeaponScene != null)
 		{
 			AddChild(EquippedWeaponScene.Instantiate());
 		}
+
+		
 	}
+
+    public override void _Process(double delta)
+    {
+		// Update the animation based on the player's movement
+		if (Velocity.X != 0)
+		{
+			animatedSprite2D.Play("walk");
+		}
+		else
+		{
+			animatedSprite2D.Play("default");
+		}
+		
+		// Flip the sprite based on the direction of movement
+        if(Velocity.X > 0)
+		{
+			animatedSprite2D.FlipH = true;
+		}
+		else if(Velocity.X < 0)
+		{
+			animatedSprite2D.FlipH = false;
+		}
+    }
+
 
 
 	public override void _PhysicsProcess(double delta)
