@@ -48,7 +48,9 @@ script = ExtResource("1_g2els")
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_yggmv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1404201156]
+[node name="FlipPivot" type="Node2D" parent="." unique_id=90934669]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FlipPivot" unique_id=1404201156]
 texture_filter = 1
 position = Vector2(9.536743e-07, 9.536743e-07)
 scale = Vector2(2, 2)

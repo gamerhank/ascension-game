@@ -5,28 +5,35 @@ using System.Diagnostics.CodeAnalysis;
 public partial class Player : CharacterBody2D
 {
 	[Export]
-	private float Speed = 300.0f;
+	private float walkSpeed = 300.0f;
+	[Export]
+	private float sprintSpeed = 450.0f;
 	[Export]
 	private float JumpVelocity = -400.0f;
 	[Export]
 	private float GravityMultiplier = 2.0f;
-
+	[Export]
+	private Vector2 weaponToHandOffset = new(0, 0);
 	[Export]
 	public PackedScene EquippedWeaponScene;
 
+	private Node2D flipPivot;
 	private AnimatedSprite2D animatedSprite2D;
 	private bool isSprinting = false;
 
     public override void _Ready()
 	{
-		animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		// Get child nodes
+		flipPivot = GetNode<Node2D>("FlipPivot");
+		animatedSprite2D = flipPivot.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
+		// Instantiate player weapon
 		if(EquippedWeaponScene != null)
 		{
-			AddChild(EquippedWeaponScene.Instantiate());
-		}
-
-		
+			Node2D EquippedWeapon = EquippedWeaponScene.Instantiate<Node2D>();
+			EquippedWeapon.Position = weaponToHandOffset; // Set offset to align with player sprite
+			flipPivot.AddChild(EquippedWeapon);
+		}	
 	}
 
     public override void _Process(double delta)
@@ -41,14 +48,10 @@ public partial class Player : CharacterBody2D
 			animatedSprite2D.Play("default");
 		}
 
-		// Flip the sprite based on the direction of movement
-        if(Velocity.X > 0)
+		// Flip the player based on the direction of movement
+		if (Velocity != Vector2.Zero)
 		{
-			animatedSprite2D.FlipH = true;
-		}
-		else if(Velocity.X < 0)
-		{
-			animatedSprite2D.FlipH = false;
+			flipPivot.Scale = flipPivot.Scale with { X = Velocity.X > 0 ? -1 : 1 };	
 		}
     }
 
@@ -74,7 +77,7 @@ public partial class Player : CharacterBody2D
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		isSprinting = Input.IsActionPressed("sprint");
-		Speed = isSprinting ? 450.0f : 300.0f; // Adjust speed based on sprinting state
+		var Speed = isSprinting ? sprintSpeed : walkSpeed; // Adjust speed based on sprinting state
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;

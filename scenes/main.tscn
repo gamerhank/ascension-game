@@ -13,6 +13,7 @@ size = Vector2(1000, 128)
 position = Vector2(572, 205)
 JumpVelocity = -800.0
 EquippedWeaponScene = ExtResource("2_jyhfs")
+weaponToHandOffset = Vector2(0, 25)
 
 [node name="tempGround" type="StaticBody2D" parent="." unique_id=1003015772]
 position = Vector2(569.32, 535.235)
