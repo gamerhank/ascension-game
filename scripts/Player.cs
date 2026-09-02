@@ -15,6 +15,7 @@ public partial class Player : CharacterBody2D
 	public PackedScene EquippedWeaponScene;
 
 	private AnimatedSprite2D animatedSprite2D;
+	private bool isSprinting = false;
 
     public override void _Ready()
 	{
@@ -39,7 +40,7 @@ public partial class Player : CharacterBody2D
 		{
 			animatedSprite2D.Play("default");
 		}
-		
+
 		// Flip the sprite based on the direction of movement
         if(Velocity.X > 0)
 		{
@@ -72,6 +73,8 @@ public partial class Player : CharacterBody2D
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		isSprinting = Input.IsActionPressed("sprint");
+		Speed = isSprinting ? 450.0f : 300.0f; // Adjust speed based on sprinting state
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;
